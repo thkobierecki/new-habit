@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Header from '../Header/Header';
 
 const StyledContainer = styled.div``;
 const StyledSection = styled.div`
@@ -59,25 +60,28 @@ const StyledImg = styled.img`
 export default class WelcomePage extends Component {
   render() {
     return (
-      <StyledContainer>
-        <StyledSection>
-          <StyledRow>
-            <StyledDetails>
-              <StyledHeading>Build Habits That Stick</StyledHeading>
-              <StyledParagraph>
+      <>
+        <Header />
+        <StyledContainer>
+          <StyledSection>
+            <StyledRow>
+              <StyledDetails>
+                <StyledHeading>Build Habits That Stick</StyledHeading>
+                <StyledParagraph>
                 Journaling daily is a powerful tool which helps you evaluate
                 your experiences and increase self-awareness. New Habit is
                 based on the idea of Bullet Journal by Ridel Carroll. It is
                 descripted as a mindfullness practice disguised as productivity
                 system.
-              </StyledParagraph>
-            </StyledDetails>
-            <StyledImgSection>
-              <StyledImg src="" />
-            </StyledImgSection>
-          </StyledRow>
-        </StyledSection>
-      </StyledContainer>
+                </StyledParagraph>
+              </StyledDetails>
+              <StyledImgSection>
+                <StyledImg src="" />
+              </StyledImgSection>
+            </StyledRow>
+          </StyledSection>
+        </StyledContainer>
+      </>
     );
   }
 }

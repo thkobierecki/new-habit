@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import SignOut from '../SignOut/SignOut';
 
 const StyledHeader = styled.header`
-  position: fixed;
+  position: absolute;
   display: grid;
   grid-template-columns: 10% 30% auto 20% 5%;
   top: 0;
@@ -52,7 +53,7 @@ export default class Header extends Component {
         <StyledLogo>New Habit</StyledLogo>
         <StyledUserSection>
           <StyledOngoingHabits>Ongoing Habits</StyledOngoingHabits>
-          <StyledLoggedBtn>Log In</StyledLoggedBtn>
+          <SignOut />
         </StyledUserSection>
       </StyledHeader>
     );

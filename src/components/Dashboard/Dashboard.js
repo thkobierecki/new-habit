@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import HabitList from "./HabitList/HabitList";
-
-export default class Dashboard extends Component {
+import { AuthUserContext, withAuthorization } from "../../Session";
+import Header from "../Header/Header";
+class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -73,20 +74,29 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <>
-        <HabitList
-          addHabit={this.addHabit}
-          deleteHabit={this.deleteHabit}
-          habits={this.state.habits}
-          toggleDayMarked={this.toggleDayMarked}
-          showNewHabitForm={this.showNewHabitForm}
-          closeNewHabitForm={this.closeNewHabitForm}
-          isNewHabitFormShown={this.isNewHabitFormShown}
-          updatedHabit={this.updateHabit}
-          isSuccessModalShown={this.isSuccessModalShown}
-          closeSuccessModal={this.closeSuccessModal}
-        />
-      </>
+      <AuthUserContext.Consumer>
+        {authUser => (
+          <>
+            <Header />
+            <HabitList
+              addHabit={this.addHabit}
+              deleteHabit={this.deleteHabit}
+              habits={this.state.habits}
+              toggleDayMarked={this.toggleDayMarked}
+              showNewHabitForm={this.showNewHabitForm}
+              closeNewHabitForm={this.closeNewHabitForm}
+              isNewHabitFormShown={this.isNewHabitFormShown}
+              updatedHabit={this.updateHabit}
+              isSuccessModalShown={this.isSuccessModalShown}
+              closeSuccessModal={this.closeSuccessModal}
+            />
+          </>
+        )}
+      </AuthUserContext.Consumer>
     );
   }
 }
+
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Dashboard);
