@@ -1,31 +1,38 @@
-import React from 'react';
-import './App.css';
-import {
-  BrowserRouter, Route, Switch, Redirect,
-} from 'react-router-dom';
-import Header from './components/Header/Header';
-import WelcomePage from './components/WelcomePage/WelcomePage';
-import SignUp from './components/SignUp/SignUp';
-import SignIn from './components/SignIn/SignIn';
-import * as ROUTES from './const/routes';
-import { withAuth } from './Session';
-import Dashboard from './components/Dashboard/Dashboard';
+import React from "react";
+import "./App.css";
 
+const App = () => {
+  const handleGetCSV = async () => {
+    const res = await fetch(
+      "https://my.api.mockaroo.com/csv.json?key=291a3730",
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const blob = await res.blob();
 
-const App = () => (
-  <div className="app">
+    // Create blob link to download
+    const url = window.URL.createObjectURL(new Blob([blob]));
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `FileName.csv`);
 
+    // Append to html link element page
+    document.body.appendChild(link);
 
-    <BrowserRouter>
-      <Switch>
-        <Route exact path={ROUTES.LANDING} component={WelcomePage} />
-        <Route exact path={ROUTES.HOME} component={Dashboard} />
-        <Route exact path={ROUTES.SIGN_UP} component={SignUp} />
-        <Route exact path={ROUTES.SIGN_IN} component={SignIn} />
-      </Switch>
-    </BrowserRouter>
+    // Start download
+    link.click();
 
-  </div>
-);
+    // Clean up and remove the link
+    link.parentNode.removeChild(link);
+  };
+  return (
+    <div className="App">
+      <button onClick={() => handleGetCSV()}>get csv</button>
+    </div>
+  );
+};
 
-export default withAuth(App);
+export default App;
